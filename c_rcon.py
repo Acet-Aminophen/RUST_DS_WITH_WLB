@@ -1,7 +1,7 @@
 from BasicPackage.basic_func import *
 from rcon.source import Client
 
-config_path = "/rust-ds-scheduler/config/config.cfg"
+config_path = "/rust-ds-scheduler-config/config.cfg"
 
 DSWWLB_IP = get_config(config_path, "DSWWLB_IP")
 DSWWLB_RCON_PORT = get_config(config_path, "DSWWLB_RCON_PORT")

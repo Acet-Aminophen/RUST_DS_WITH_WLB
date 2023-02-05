@@ -8,7 +8,7 @@ import random
 vacations = ["23 03 01", "23 05 05", "23 05 27", "23 06 06", "23 08 15", "23 09 28", "23 09 29", "23 09 30", "23 10 03",
              "23 10 09", "23 12 25"]
 
-config_path = "/rust-ds-scheduler/config/config.cfg"
+config_path = "/rust-ds-scheduler-config/config.cfg"
 
 GCE_ID = get_config(config_path, "GCE_ID")
 GCE_PW = get_config(config_path, "GCE_PW")
@@ -28,11 +28,11 @@ flag_00 = False
 workbench_tier1 = []
 workbench_tier2 = []
 workbench_tier3 = []
-with open("/rust-ds-scheduler/config/workbench/tier1") as f:
+with open("/rust-ds-scheduler-config/workbench/tier1") as f:
     workbench_tier1 = f.read().splitlines()
-with open("/rust-ds-scheduler/config/workbench/tier2") as f:
+with open("/rust-ds-scheduler-config/workbench/tier2") as f:
     workbench_tier2 = f.read().splitlines()
-with open("/rust-ds-scheduler/config/workbench/tier3") as f:
+with open("/rust-ds-scheduler-config/workbench/tier3") as f:
     workbench_tier3 = f.read().splitlines()
 
 
