@@ -18,7 +18,16 @@ gce_driver = gce.get_driver(GCE_ID, GCE_PW, GCE_PR)
 the_node = gce.get_node(gce_driver, "rust-ds-with-wlb")
 
 item_mode = True if get_config(config_path, "ITEM_MODE_ACTIVATED") == "true" else False
+if get_config(config_path, "ITEM_MODE_ACTIVATED") == "true":
+    print("Item Mode Deactivated")
+else:
+    print("Item Mode Activated")
 flag_server_on = True if str(the_node.state) == "running" else False
+if str(the_node.state) == "running" :
+    print("The DS is already running")
+
+schedule_timer_indicator = 0
+item_timer_indicator = 0
 
 flag_15 = False
 flag_30 = False
@@ -50,6 +59,8 @@ def send_item():
     global flag_30
     global flag_45
     global flag_00
+    global item_timer_indicator
+    item_timer_indicator += 5
 
     if not flag_00 and str(time.strftime("%H %M")) == "00 00":
         flag_15 = False
@@ -74,7 +85,9 @@ def send_item():
         flag_45 = True
         give_item(workbench_tier1, 2)
 
-    print("Item Checked")
+    if item_timer_indicator > 3600:
+        item_timer_indicator = 0
+        print("Item Checked")
     threading.Timer(5, send_item).start()
 
 
@@ -92,7 +105,6 @@ def stop_node():
     global flag_server_on
     global gce_driver
     global the_node
-
     flag_server_on = False
     c_rcon.send_rcon("server.writecfg")
     time.sleep(5)
@@ -107,6 +119,9 @@ def do_schedule():
     global gce_driver
     global flag_server_on
     global the_node
+    global schedule_timer_indicator
+
+    schedule_timer_indicator += 5
     t_day = str(time.strftime("%A")).lower()
 
     if not flag_server_on and t_day == "friday" and int(time.strftime("%H")) == 15:
@@ -124,7 +139,9 @@ def do_schedule():
                 print("3")
                 stop_node()
 
-    print("Timer Checked")
+    if schedule_timer_indicator > 3600:
+        schedule_timer_indicator = 0
+        print("Timer Checked")
     threading.Timer(5, do_schedule).start()
 
 
