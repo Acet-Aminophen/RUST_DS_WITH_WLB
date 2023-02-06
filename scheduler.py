@@ -19,9 +19,9 @@ the_node = gce.get_node(gce_driver, "rust-ds-with-wlb")
 
 item_mode = True if get_config(config_path, "ITEM_MODE_ACTIVATED") == "true" else False
 if get_config(config_path, "ITEM_MODE_ACTIVATED") == "true":
-    print("Item Mode Deactivated")
-else:
     print("Item Mode Activated")
+else:
+    print("Item Mode Deactivated")
 flag_server_on = True if str(the_node.state) == "running" else False
 if str(the_node.state) == "running" :
     print("The DS is already running")
